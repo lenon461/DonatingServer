@@ -10,7 +10,7 @@ var client = net.connect({port: 3333, host:'localhost'},function(){
     console.log('Client connected');
     
     var temp = ProtocallForm;
-    temp.functionName = "createCompany";
+    temp.functionName = "queryAllChannels";
     temp.args = [1, 11];
     client.write(JSON.stringify(temp));
 });

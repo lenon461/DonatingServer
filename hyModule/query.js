@@ -62,45 +62,24 @@ module.exports = {
     
     async function() {
         try {
+                    const channellist = [];
+            const client = new Client();
+            const walletPath = path.join(process.cwd(), 'wallet');
+            const wallet = new FileSystemWallet(walletPath);
 
-            /*
-            //const peer = new Peer("grpc://localhost:7050",options)
-            //console.log(peer); 
+            const Identity = await wallet.export("admin");
+            const peer = new Peer("grpc://localhost:7051",0);
+
+            client.setAdminSigningIdentity(Identity.privateKey, Identity.certificate, Identity.mspId);
+            const result = await client.queryChannels(peer, 1);
             
-            const client = Client.loadFromConfig('../../basic-network/connection.yaml');
-            const peer = client.getPeer("peer0.org1.example.com");
+            channellist.push(result.channels[0].channel_id);
 
-            const user = new User();
-            let cert = fs.readFileSync('/home/hyper/cry/Capstone_TeamLEGO/basic-network/crypto-config/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/
-            
-            await user.setEnrollment();
-            console.log(peer);
-            console.log(user);
-             * let clientcert = fs.readFileSync('/home/hyper/cry/Capstone_TeamLEGO/basic-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt');
-            let clientkey = fs.readFileSync('/home/hyper/cry/Capstone_TeamLEGO/basic-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key');
-            client.setTlsClientCertAndKey(clientcert, clientkey);
-            let cert = fs.readFileSync('/home/hyper/cry/Capstone_TeamLEGO/basic-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/admincerts/Admin@org1.example.com-cert.pem');
-            let pk = fs.readFileSync('/home/hyper/cry/Capstone_TeamLEGO/basic-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/keystore/46be1d569fe68f33e517c9e0072a0ccfbfb42727480fb8c8d0223af321a7893d_sk');
-            const  mspid = 'Org1MSP';
-            client.setAdminSigningIdentity(pk, cert, mspid);
-
-            client.setUserContext(user, 0);
-            console.log(client);
-
-
-            const channelqueryresponse = await client.queryChannels(peer,0);
-
-            console.log(channelqueryresponse);
-
-
-            //console.log(channelqueryresponse);
-
-*/
-
+            return channellist;
 
 
         } catch (error) {
-            console.log("ERRORINTHIS ", error);
+            console.error(`failed to queryAllChannels ${error}`);
             process.exit(1);
         }
     },
@@ -146,7 +125,7 @@ module.exports = {
 
             return tempBlockinfo;
         } catch (error) {
-            console.error(`Failed to evaluate transaction: ${error}`);
+            console.error(`Failed to queryblockinfo: ${error}`);
             process.exit(1);
         }
     }

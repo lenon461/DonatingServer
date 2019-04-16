@@ -36,8 +36,13 @@ var server = net.createServer((socket) => {
                     console.log(err);
                 });
                 break;
-          case 'channellist':
+          case 'queryAllChannels':
                 console.log('///channellist');
+                query.queryAllChannels().then((result) =>{
+                    console.log(result);
+                }).catch((err) => {
+                    console.log(err);
+                });
                 break;
           case 'queryblockinfo':
                 console.log('///queryblockinfo');
