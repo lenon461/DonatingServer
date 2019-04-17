@@ -38,8 +38,10 @@ var server = net.createServer((socket) => {
                 break;
           case 'queryAllChannels':
                 console.log('///channellist');
+                var tt = jsonform.Channelinfo;
                 query.queryAllChannels().then((result) =>{
-                    console.log(result);
+                    tt.channellist = result;
+                    console.log(tt);
                 }).catch((err) => {
                     console.log(err);
                 });

@@ -73,7 +73,10 @@ module.exports = {
             client.setAdminSigningIdentity(Identity.privateKey, Identity.certificate, Identity.mspId);
             const result = await client.queryChannels(peer, 1);
             
-            channellist.push(result.channels[0].channel_id);
+            for(var i = 0; i < result.channels.length; i++){
+                channellist.push(result.channels[i].channel_id);
+
+            }
 
             return channellist;
 

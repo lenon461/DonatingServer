@@ -23,8 +23,13 @@ var Block_data_transaction_info = {
   extension: '',
   typeString: '' 
 };
+var Channelinfo = {
+    "wallet" : "",
+    "channellist" : [""]
+};
 
 exports.ProtocallForm = ProtocallForm;
 exports.Channelform = Channelform;
 exports.Blockinfo = Blockinfo;
 exports.Block_data_transaction_info = Block_data_transaction_info;
+exports.Channelinfo = Channelinfo
