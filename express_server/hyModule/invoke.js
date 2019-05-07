@@ -15,7 +15,7 @@ const ccp = JSON.parse(ccpJSON);
 module.exports = {
     donateMoney :
 
-    async function (id, value) {
+    async function (channelname, id, value) {
         try {
 
             // Create a new file system based wallet for managing identities.
@@ -36,7 +36,7 @@ module.exports = {
             await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } });
 
             // Get the network (channel) our contract is deployed to.
-            const network = await gateway.getNetwork('mychannel');
+            const network = await gateway.getNetwork(channelname);
 
             // Get the contract from the network.
             const contract = network.getContract('fabcompany');
@@ -61,7 +61,7 @@ module.exports = {
 
     createCompany :
 
-    async function (id, name, money){
+    async function (channelname, id, name, money){
         try {
 
             // Create a new file system based wallet for managing identities.
@@ -82,7 +82,7 @@ module.exports = {
             await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } });
 
             // Get the network (channel) our contract is deployed to.
-            const network = await gateway.getNetwork('mychannel');
+            const network = await gateway.getNetwork(channelname);
 
             // Get the contract from the network.
             const contract = network.getContract('fabcompany');

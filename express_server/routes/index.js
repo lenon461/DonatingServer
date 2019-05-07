@@ -15,8 +15,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/channels', function(req, res, next) {
 
-    console.log(req.query);
-
     query.queryAllChannels()
         .then((result) => { 
             console.log(result);
@@ -25,11 +23,38 @@ router.get('/channels', function(req, res, next) {
             console.log(err);
         }); 
 });
+router.post('/channels/donate/', function(req, res, next) {
+    let channelname = req.body.channelname;
+    let id = req.body.id;
+    let money = req.body.money;
+    invoke.donateMoney(channelname, id, money)
+        .then((result) => {
+            console.log(result);
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+});
 
-router.get('/channels/:channelname', function(req, res, next) {
-
-    let channelname = req.params.channelname;
+router.post('/channels/create/', function(req, res, next) {
+    let channelname = req.query.channelname;
+    let id = req.body.id;
+    let name = req.body.name;
+    let money = req.body.money;
     
+    invoke.createCompany(channelname, id, name, money)
+        .then((result) => {
+            console.log(result);
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+});
+
+router.post('/channels/ledger/', function(req, res, next) {
+
+    let channelname = req.body.channelname;
+    console.log(channelname);
     query.queryAllCompanys(channelname)
         .then((result) => {
             console.log(result);
@@ -38,8 +63,8 @@ router.get('/channels/:channelname', function(req, res, next) {
             console.log(err);
         });
 });
-router.get('/channels/:channelname/block', function(req, res, next) {
-    let channelname = req.params.channelname;
+router.post('/channels/block', function(req, res, next) {
+    let channelname = req.body.channelname;
     query.queryblockinfo(channelname)
         .then((result) => {
             console.log(result);

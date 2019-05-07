@@ -1,5 +1,5 @@
-var net = require('net');
-var jsonform = require('./protocall.js');
+const net = require('net');
+const jsonform = require('./protocall.js');
 const query = require('./hyModule/query.js');
 const invoke = require('./hyModule/invoke.js');
 
