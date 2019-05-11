@@ -6,10 +6,7 @@ const indexRouter = require('./routes');
 
 const app = express();
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = swaggerJSDoc(options)
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || 8989);
