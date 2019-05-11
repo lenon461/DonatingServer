@@ -8,7 +8,7 @@ const { FileSystemWallet, Gateway } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
 
-const ccpPath = path.resolve(__dirname, '..', '..', 'basic-network', 'connection.json');
+const ccpPath = path.resolve(__dirname, '..', '..', '..', '..', 'basic-network', 'connection.json');
 const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
 const ccp = JSON.parse(ccpJSON);
 
@@ -44,7 +44,7 @@ async function main() {
         // console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         // console.log(`test`, result.toString());
         const jsonresult = result.toString();
-        //console.log(jsonresult)
+        console.log(jsonresult)
         return jsonresult;
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
