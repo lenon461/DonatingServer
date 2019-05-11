@@ -1,0 +1,219 @@
+swagger: '2.0'
+info:
+  description: "나혼자하는 하이퍼레저 프로젝트"
+  version: 0.0.1
+  title: Hyperledger For Donating API Collections
+  contact:
+    email: lenon461@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'localhost:8989'
+basePath: /
+tags:
+  - name: query
+    description: test
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+  - name: invoke
+    description: test
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+schemes:
+  - http
+paths:
+  /channels:
+    get:
+      tags:
+        - query
+      summary: queryChannel
+      description: ''
+      operationId: test
+      consumes:
+        - application/xml
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: success
+  /channels/donate:
+    put:
+      tags:
+        - invoke
+      summary: invokeDonate
+      description: ''
+      operationId: test2
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      parameters:
+        - in: body
+          name: body
+          schema:
+              $ref: '#/definitions/donate'
+      responses:
+        '200':
+          description: success
+  /channels/create:
+    put:
+      tags:
+        - invoke
+      summary: invokCreate
+      description: ''
+      operationId: test2
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      parameters:
+        - in: body
+          name: body
+          schema:
+              $ref: '#/definitions/create'
+      responses:
+        '200':
+          description: success
+  /channels/ledger:
+    get:
+      tags:
+        - query
+      summary: queryLedger
+      description: ''
+      operationId: test3
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      parameters:
+        - in: query
+          name: channelname
+      responses:
+        '200':
+          description: success
+  /channels/block:
+    get:
+      tags:
+        - query 
+      summary: queryBlock
+      description: ''
+      operationId: test3
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      parameters:
+        - in: query
+          name: channelname
+      responses:
+        '200':
+          description: success
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:pets': modify pets in your account
+      'read:pets': read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  channelname:
+      type: object
+      properties:
+          channelname:
+              type: string
+  create:
+      type: object
+      properties:
+          channelname:
+              type: string
+          id:
+              type: string
+          name:
+              type: string
+          money:
+              type: string
+  donate:
+      type: object
+      properties:
+          channelname:
+              type: string
+          id:
+              type: string
+          money:
+              type: string
+
+  Card:
+    type: object
+    properties:
+      peoples_hand:
+        type: array
+        items:
+          type: array
+          items:
+            type: string
+      peoples_acquired:
+        type: array
+        items:
+          type: array
+          items:
+              type: string
+      peoples_large_t:
+        type: array
+        items:
+          type: integer
+      peoples_small_t:
+        type: array
+        items:
+          type: integer
+      peoples_name:
+        type: array
+        items:
+          type: string
+      team1_member:
+        type: array
+        items:
+          type: string
+      team2_member:
+        type: array
+        items:
+          type: string
+      team1_point:
+        type: integer
+        default: 0
+      team2_point:
+        type: integer
+        default: 0
+      card_dummy:
+        type: array
+        items:
+          type: string
+      field_card:
+        type: array
+        items:
+          type: string
+      field_card_point:
+        type: integer
+        default: 0
+      top_card:
+        type: array
+        items:
+          type: string
+      top_card_power:
+        type: integer
+        default: 0
+      first_player:
+        type: integer
+        default: 0
+      next_player:
+        type: integer
+        default: 0
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

@@ -6,14 +6,23 @@ const indexRouter = require('./routes');
 
 const app = express();
 
+const yaml = require('yamljs');
+const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggeryaml = yaml.load('./swagger/swagger.yaml');
+
+
+
 
 
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || 8989);
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggeryaml));
 
 app.use('/' , indexRouter);
 

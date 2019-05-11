@@ -4,9 +4,6 @@ var router = express.Router();
 const query =  require('../hyModule/query.js');
 const invoke = require('../hyModule/invoke.js');
 
-router.post('/c', function(req, res, next){
-    console.log("post method get");
-});
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -23,7 +20,7 @@ router.get('/channels', function(req, res, next) {
             console.log(err);
         }); 
 });
-router.post('/channels/donate/', function(req, res, next) {
+router.put('/channels/donate/', function(req, res, next) {
     let channelname = req.body.channelname;
     let id = req.body.id;
     let money = req.body.money;
@@ -36,8 +33,8 @@ router.post('/channels/donate/', function(req, res, next) {
         });
 });
 
-router.post('/channels/create/', function(req, res, next) {
-    let channelname = req.query.channelname;
+router.put('/channels/create/', function(req, res, next) {
+    let channelname = req.body.channelname;
     let id = req.body.id;
     let name = req.body.name;
     let money = req.body.money;
@@ -51,10 +48,9 @@ router.post('/channels/create/', function(req, res, next) {
         });
 });
 
-router.post('/channels/ledger/', function(req, res, next) {
+router.get('/channels/ledger/', function(req, res, next) {
 
-    let channelname = req.body.channelname;
-    console.log(channelname);
+    let channelname = req.query.channelname;
     query.queryAllCompanys(channelname)
         .then((result) => {
             console.log(result);
@@ -63,8 +59,8 @@ router.post('/channels/ledger/', function(req, res, next) {
             console.log(err);
         });
 });
-router.post('/channels/block', function(req, res, next) {
-    let channelname = req.body.channelname;
+router.get('/channels/block', function(req, res, next) {
+    let channelname = req.query.channelname;
     query.queryblockinfo(channelname)
         .then((result) => {
             console.log(result);
