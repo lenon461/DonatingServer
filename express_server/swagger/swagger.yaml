@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: "나혼자하는 하이퍼레저 프로젝트"
+  description: "기부용  하이퍼레저 프로젝트"
   version: 0.0.1
   title: Hyperledger For Donating API Collections
   contact:
@@ -8,7 +8,7 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: 'localhost:8989'
+host: '34.85.90.33:8989'
 basePath: /
 tags:
   - name: query
@@ -32,9 +32,9 @@ paths:
       description: ''
       operationId: test
       consumes:
-        - application/xml
+        - application/json
       produces:
-        - application/xml
+        - application/json
       responses:
         '200':
           description: success
@@ -48,7 +48,7 @@ paths:
       consumes:
         - application/json
       produces:
-        - application/xml
+        - application/json
       parameters:
         - in: body
           name: body
@@ -67,7 +67,7 @@ paths:
       consumes:
         - application/json
       produces:
-        - application/xml
+        - application/json
       parameters:
         - in: body
           name: body
@@ -86,7 +86,7 @@ paths:
       consumes:
         - application/json
       produces:
-        - application/xml
+        - application/json
       parameters:
         - in: query
           name: channelname
@@ -103,7 +103,7 @@ paths:
       consumes:
         - application/json
       produces:
-        - application/xml
+        - application/json
       parameters:
         - in: query
           name: channelname
@@ -149,71 +149,6 @@ definitions:
           money:
               type: string
 
-  Card:
-    type: object
-    properties:
-      peoples_hand:
-        type: array
-        items:
-          type: array
-          items:
-            type: string
-      peoples_acquired:
-        type: array
-        items:
-          type: array
-          items:
-              type: string
-      peoples_large_t:
-        type: array
-        items:
-          type: integer
-      peoples_small_t:
-        type: array
-        items:
-          type: integer
-      peoples_name:
-        type: array
-        items:
-          type: string
-      team1_member:
-        type: array
-        items:
-          type: string
-      team2_member:
-        type: array
-        items:
-          type: string
-      team1_point:
-        type: integer
-        default: 0
-      team2_point:
-        type: integer
-        default: 0
-      card_dummy:
-        type: array
-        items:
-          type: string
-      field_card:
-        type: array
-        items:
-          type: string
-      field_card_point:
-        type: integer
-        default: 0
-      top_card:
-        type: array
-        items:
-          type: string
-      top_card_power:
-        type: integer
-        default: 0
-      first_player:
-        type: integer
-        default: 0
-      next_player:
-        type: integer
-        default: 0
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'

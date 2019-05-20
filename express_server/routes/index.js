@@ -63,7 +63,24 @@ router.get('/channels/block', function(req, res, next) {
     let channelname = req.query.channelname;
     query.queryblockinfo(channelname)
         .then((result) => {
-            console.log(result);
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+});
+router.get('/channels/block2', function(req, res, next) {
+    let channelname = req.query.channelname;
+    query.queryblockinfo2(channelname)
+        .then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+});
+router.get('/channels/txlist', function(req, res, next) {
+    let channelname = req.query.channelname;
+    query.querytxinfo(channelname)
+        .then((result) => {
             res.json(result);
         }).catch((err) => {
             console.log(err);

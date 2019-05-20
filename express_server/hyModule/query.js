@@ -118,14 +118,116 @@ module.exports = {
             var tempBlock_data_transaction_info = [];
             var blockheight = (await channel.queryInfo()).height.low;
 
+		blockheight = 3;
             for(var i = 0; i < blockheight; i++){
                 try{
-                    tempBlockinfo.push((await channel.queryBlock(i)).header);
-                    tempBlock_data_transaction_info.push((await channel.queryBlock(i)).data.data[0].payload.header.channel_header);
+			tempBlockinfo.push((await channel.queryBlock(i)).header);
+			tempBlock_data_transaction_info.push((await channel.queryBlock(i)).data.data[0].payload.header.channel_header);
+
                 } catch(err){
                     console.log(err);
                 }
             }
+	    
+
+            return tempBlockinfo;
+        } catch (error) {
+            console.error(`Failed to queryblockinfo: ${error}`);
+            process.exit(1);
+        }
+    },
+    queryblockinfo2 :
+    
+    async function(channelname){
+        try {
+            // Create a new file system based wallet for managing identities.
+            const walletPath = path.join(process.cwd(), 'wallet');
+            const wallet = new FileSystemWallet(walletPath);
+
+            // Check to see if we've already enrolled the user.
+            const userExists = await wallet.exists('user2');
+
+            if (!userExists) {
+                console.log('An identity for the user "user2" does not exist in the wallet');
+                console.log('Run the registerUser.js application before retrying');
+                return;
+            }  
+
+            // Create a new gateway for connecting to our peer node.
+            const gateway = new Gateway();
+            await gateway.connect(ccp, { wallet, identity: 'user2', discovery: { enabled: false } });
+            // Get the network (channel) our contract is deployed to.
+            const network = await gateway.getNetwork(channelname);
+            const channel = network.getChannel();
+            
+            var tempBlockinfo = [];
+            var tempBlock_data_transaction_info = [];
+            var blockheight = (await channel.queryInfo()).height.low;
+
+		blockheight = 3;
+            for(var i = 0; i < blockheight; i++){
+                try{
+			tempBlockinfo.push((await channel.queryBlock(i)));//.header);
+			tempBlock_data_transaction_info.push((await channel.queryBlock(i)).data.data[0].payload.header.channel_header);
+
+                } catch(err){
+                    console.log(err);
+                }
+            }
+	    
+
+            return tempBlock_data_transaction_info;
+        } catch (error) {
+            console.error(`Failed to queryblockinfo: ${error}`);
+            process.exit(1);
+        }
+    },
+    querytxinfo :
+    
+    async function(channelname){
+        try {
+            // Create a new file system based wallet for managing identities.
+            const walletPath = path.join(process.cwd(), 'wallet');
+            const wallet = new FileSystemWallet(walletPath);
+
+            // Check to see if we've already enrolled the user.
+            const userExists = await wallet.exists('user2');
+
+            if (!userExists) {
+                console.log('An identity for the user "user2" does not exist in the wallet');
+                console.log('Run the registerUser.js application before retrying');
+                return;
+            }  
+
+            // Create a new gateway for connecting to our peer node.
+            const gateway = new Gateway();
+            await gateway.connect(ccp, { wallet, identity: 'user2', discovery: { enabled: false } });
+            // Get the network (channel) our contract is deployed to.
+            const network = await gateway.getNetwork(channelname);
+            const channel = network.getChannel();
+            
+            var tempBlockinfo = [];
+            var tempBlock_data_transaction_info = [];
+            var blockheight = (await channel.queryInfo()).height.low;
+
+            for(var i = 0; i < blockheight; i++){
+                try{
+		    var block1 = ((await channel.queryBlock(i)).data).data[0].payload.data;
+		    if(!block1.actions) continue;
+		    var block2 = block1.actions[0].payload.chaincode_proposal_payload.input.chaincode_spec.input.args;
+
+			var block3 = [];
+			for(var j = 0; j < block2.length; j++){
+				block3.push(block2[j].toString());
+			}
+			tempBlockinfo.push(block3);
+			
+			
+                } catch(err){
+                    console.log(err);
+                }
+            }
+	    
             //console.log(tempBlockinfo);
             //console.log(tempBlock_data_transaction_info);
 
